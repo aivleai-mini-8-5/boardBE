@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto17 # Amazon Linux 2023 / AL2 표준 자바 17
+  build:
+    commands:
+      - echo Build Starting...
+      - chmod +x ./gradlew
+      - ./gradlew clean build -x test # 테스트 생략하고 빌드
+  post_build:
+    commands:
+      - echo Build Completed on `date`
+
+artifacts:
+  files:
+    - build/libs/*.jar
+    - scripts/**
+    - appspec.yml
+  discard-paths: yes # 폴더 구조 무시하고 파일만 모으기

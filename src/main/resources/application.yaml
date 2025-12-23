@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    # RDS 엔드포인트를 여기에 넣으세요 (포트 3306 뒤에 /appdb 필수)
+    url: jdbc:mysql://a1174-prod-db.cqbgqrxkrfb4.us-east-1.rds.amazonaws.com:3306/appdb?serverTimezone=Asia/Seoul
+    username: admin
+    password: password1234! # RDS 비밀번호
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update # 실무에선 validate를 쓰지만, 편의상 테이블 자동 생성을 위해 update 사용
+    properties:
+      hibernate:
+        format_sql: true
+
+logging:
+  level:
+    org.hibernate.sql: info # 실행되는 SQL을 로그로 확인
