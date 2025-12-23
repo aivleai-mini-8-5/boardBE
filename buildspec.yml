@@ -3,19 +3,21 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      java: corretto17 # Amazon Linux 2023 / AL2 표준 자바 17
+      java: corretto17
   build:
     commands:
       - echo Build Starting...
       - chmod +x ./gradlew
-      - ./gradlew clean build -x test # 테스트 생략하고 빌드
+      - ./gradlew clean build -x test
   post_build:
     commands:
       - echo Build Completed on `date`
+      # [추가됨] 빌드된 JAR 파일을 루트 경로로 꺼내오기 (복사)
+      - cp build/libs/*.jar .
 
 artifacts:
   files:
-    - build/libs/*.jar
-    - scripts/**
+    - "*.jar"         # 루트로 꺼낸 jar 파일 포함
+    - scripts/**/* # scripts 폴더 통째로 구조 유지해서 포함
     - appspec.yml
-  discard-paths: yes # 폴더 구조 무시하고 파일만 모으기
+  discard-paths: no   # [중요] 폴더 구조 유지하기! (yes -> no 변경)
