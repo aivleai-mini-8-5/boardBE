@@ -16,6 +16,11 @@ hooks:
     - location: scripts/cleanup.sh
       timeout: 60
       runas: ec2-user
+    # [추가됨] 설치 직후 로깅 에이전트 세팅
+  AfterInstall:
+    - location: scripts/install_logging.sh
+      timeout: 300
+      runas: root  # (중요: 설치는 root 권한 필요!)
 
   ApplicationStart:
     - location: scripts/start_server.sh  # (경로 scripts/ 붙였는지 확인 필요. 파일 위치에 맞게!)
