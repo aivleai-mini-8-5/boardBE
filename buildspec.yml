@@ -12,7 +12,7 @@ phases:
   post_build:
     commands:
       - echo Build Completed on `date`
-      # [추가됨] 빌드된 JAR 파일을 루트 경로로 꺼내오기 (복사)
+      # 빌드된 JAR 파일을 루트 경로로 꺼내오기 (복사)
       - cp build/libs/*.jar .
 
 artifacts:
@@ -20,4 +20,4 @@ artifacts:
     - "*.jar"         # 루트로 꺼낸 jar 파일 포함
     - scripts/**/* # scripts 폴더 통째로 구조 유지해서 포함
     - appspec.yml
-  discard-paths: no   # [중요] 폴더 구조 유지하기! (yes -> no 변경)
+  discard-paths: no   # 폴더 구조 유지 
