@@ -16,7 +16,7 @@ public class GuestController {
     // 1. 서버 상태 확인용 (Health Check)
     @GetMapping("/health")
     public String health() {
-        return "Backend Status:Version2 Application is UP! Current Time: " + LocalDateTime.now();
+        return "Backend Status:Blue/Green Application is UP! Current Time: " + LocalDateTime.now();
     }
 
     // 2. 방명록 조회 (Read)
