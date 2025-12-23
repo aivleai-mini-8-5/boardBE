@@ -3,7 +3,7 @@ os: linux
 files:
   - source:  /
     destination: /home/ec2-user/app/step1
-    overwrite: yes
+    overwrite: true  # 'yes' 대신 'true' 사용!
 
 permissions:
   - object: /
@@ -12,11 +12,17 @@ permissions:
     group: ec2-user
 
 hooks:
-  ApplicationStart:
-    - location: start_server.sh # 경로 주의 (artifacts에서 경로 무시했으므로)
+  BeforeInstall:  # [추가됨] 설치 전 청소 단계
+    - location: scripts/cleanup.sh
       timeout: 60
       runas: ec2-user
+
+  ApplicationStart:
+    - location: scripts/start_server.sh  # (경로 scripts/ 붙였는지 확인 필요. 파일 위치에 맞게!)
+      timeout: 60
+      runas: ec2-user
+
   ApplicationStop:
-    - location: stop_server.sh
+    - location: scripts/stop_server.sh   # (경로 scripts/ 붙였는지 확인 필요)
       timeout: 60
       runas: ec2-user
